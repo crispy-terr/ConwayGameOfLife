@@ -4,11 +4,12 @@ GREEN = (0,255,0)
 BLACK = (0,0,0)
 
 class Grid:
-    def __init__(self, grid, surf):
+    def __init__(self, grid, surf, color):
         self.grid = grid
         self.rows = len(grid)
         self.cols = len(grid[0])
         self.surf = surf
+        self.color = color
 
     def __str__(self):
         var = ""
@@ -31,13 +32,13 @@ class Grid:
             for j in range(self.cols):
                 cell = pygame.Rect(xPos, yPos, 10, 10)
                 if(self.grid[i][j]):
-                    pygame.draw.rect(self.surf, GREEN, cell)
+                    pygame.draw.rect(self.surf, self.color, cell)
                 else:
                     pygame.draw.rect(self.surf, BLACK, cell)
                 xPos+=10
 
     def run_conway_rules(self):
-        next_grid = [[0 for x in range(self.rows)] for y in range(self.cols)] 
+        next_grid = [[0 for x in range(self.rows*10)] for y in range(self.cols*10)] 
         for r in range(self.rows):
             for c in range(self.cols):
                 live_neighbors = 0
