@@ -3,12 +3,12 @@ from Grid import Grid
 import pygame
 import time
 
-def gen_random_grid(rows, cols):
+def gen_random_grid(rows, cols, dense_thresh):
     var = [[0 for x in range(rows)] for y in range(cols)] 
     for i in range(rows):
         for j in range(cols):
-            rand = random.randint(0,1)
-            if rand == 1:
+            rand = random.randint(0,100)
+            if rand > dense_thresh:
                 var[j][i] = True
             else:
                 var[j][i] = False
@@ -31,7 +31,27 @@ else:
     b = int(input("Blue: "))
     live_color = (r, g, b)
 
-cool = gen_random_grid(int(width/10),int(height/10))
+density_select = int(input("Density:\n1: Low\n2: Moderate\n3: High\nEnter: "))
+
+match density_select:
+    case 1:
+        density_threshold = 25
+    case 3:
+        density_threshold = 80
+    case _:
+        density_threshold = 40
+    
+
+cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
+
+print("\n  ******************************************\n  *                                        ")
+print("  *  Settings:                             ")
+print(f"  *  Hight: {height}                             ")
+print(f"  *  Width: {width}                             ")
+print(f"  *  Color: {live_color}                    ")
+print(f"  *  Density: {density_threshold}                           ")
+print("  *                                        ")
+print("  ******************************************\n")
 
 # Display
 pygame.init()

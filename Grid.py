@@ -1,6 +1,5 @@
 import pygame
 
-GREEN = (0,255,0)
 BLACK = (0,0,0)
 
 class Grid:
