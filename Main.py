@@ -14,6 +14,10 @@ def gen_random_grid(rows, cols, dense_thresh):
                 var[j][i] = False
     return var
 
+# Replace default pygame shortcut image
+image = pygame.image.load("Glider.png")
+pygame.display.set_icon(image)
+
 # Configure
 height = int(input("Height of grid: "))
 width = int(input("Width of grid: "))
