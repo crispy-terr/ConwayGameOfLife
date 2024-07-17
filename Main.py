@@ -8,7 +8,7 @@ def gen_random_grid(rows, cols, dense_thresh):
     for i in range(rows):
         for j in range(cols):
             rand = random.randint(0,100)
-            if rand > dense_thresh:
+            if rand < dense_thresh:
                 var[j][i] = True
             else:
                 var[j][i] = False
@@ -53,7 +53,7 @@ if board_type == 1:
 
     match density_select:
         case 1:
-            density_threshold = 25
+            density_threshold = 10
         case 3:
             density_threshold = 80
         case _:
@@ -70,7 +70,7 @@ print("  *  Settings:                             ")
 print(f"  *  Height: {height}                             ")
 print(f"  *  Width: {width}                             ")
 print(f"  *  Color: {live_color}                    ")
-print(f"  *  Density: {density_threshold}                           ")
+print(f"  *  Initial Density: {density_threshold}                           ")
 print("  *                                        ")
 print("  ******************************************\n")
 
@@ -91,4 +91,3 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     pygame.display.update()
-

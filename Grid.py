@@ -62,7 +62,3 @@ class Grid:
                     else:
                         next_grid[r][c] = False
         self.grid = next_grid
-    
-    
-    
-
