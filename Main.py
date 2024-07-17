@@ -62,7 +62,7 @@ if board_type == 1:
     cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
 elif board_type == 2:
     cool = gen_checkerboard_grid(int(width/10),int(height/10))
-    density_threshold = "NA"
+    density_threshold = "Checkerboard"
 
 print("\n  ******************************************\n  *                                        ")
 print("  *  Settings:                             ")
