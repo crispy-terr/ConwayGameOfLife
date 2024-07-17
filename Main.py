@@ -35,17 +35,18 @@ height = int(input("Height of grid: "))
 width = int(input("Width of grid: "))
 live_color_select = int(input("1: Red\n2: Green\n3: Blue\n4: RGB\nEnter: "))
 
-if live_color_select == 1:
-    live_color = (255, 0, 0)
-elif live_color_select == 2:
-    live_color = (0, 255, 0)
-elif live_color_select == 3:
-    live_color = (0, 0, 255)
-else:
-    r = int(input("Red: "))
-    g = int(input("Green: "))
-    b = int(input("Blue: "))
-    live_color = (r, g, b)
+match live_color_select:
+    case 1:
+        live_color = (255, 0, 0)
+    case 3:
+        live_color = (0, 0, 255)
+    case 4:
+        r = int(input("Red: "))
+        g = int(input("Green: "))
+        b = int(input("Blue: "))
+        live_color = (r, g, b)
+    case _:
+        live_color = (0, 255, 0)
 
 if board_type == 1:
     density_select = int(input("Density:\n1: Low\n2: Moderate\n3: High\nEnter: "))
