@@ -60,11 +60,12 @@ if board_type == 1:
             density_threshold = 40
 
     cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
+
 elif board_type == 2:
     cool = gen_checkerboard_grid(int(width/10),int(height/10))
     density_threshold = "NA"
 
-print("\n  ******************************************\n  *                                        ")
+print("\n  ******************************************\n  *")
 print("  *  Settings:                             ")
 print(f"  *  Height: {height}                             ")
 print(f"  *  Width: {width}                             ")
@@ -83,8 +84,8 @@ cool_grid.draw_board()
 
 running = True
 while running:
-    cool_grid.run_conway_rules()
     cool_grid.draw_board()
+    cool_grid.run_conway_rules()
     time.sleep(0.1)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
