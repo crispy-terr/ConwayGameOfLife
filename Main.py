@@ -14,11 +14,23 @@ def gen_random_grid(rows, cols, dense_thresh):
                 var[j][i] = False
     return var
 
+def gen_checkerboard_grid(rows, cols):
+    var = [[0 for x in range(rows)] for y in range(cols)] 
+    for i in range(rows):
+        for j in range(cols):
+            if (i+j)%2 == 0:
+                var[j][i] = True
+            else:
+                var[j][i] = False
+    return var
+
 # Replace default pygame shortcut image
 image = pygame.image.load("Glider.png")
 pygame.display.set_icon(image)
 
 # Configure
+board_type = int(input("Initialize Board:\n1: Random\n2: Checkerboard\nEnter: "))
+
 height = int(input("Height of grid: "))
 width = int(input("Width of grid: "))
 live_color_select = int(input("1: Red\n2: Green\n3: Blue\n4: RGB\nEnter: "))
@@ -35,22 +47,25 @@ else:
     b = int(input("Blue: "))
     live_color = (r, g, b)
 
-density_select = int(input("Density:\n1: Low\n2: Moderate\n3: High\nEnter: "))
+if board_type == 1:
+    density_select = int(input("Density:\n1: Low\n2: Moderate\n3: High\nEnter: "))
 
-match density_select:
-    case 1:
-        density_threshold = 25
-    case 3:
-        density_threshold = 80
-    case _:
-        density_threshold = 40
-    
+    match density_select:
+        case 1:
+            density_threshold = 25
+        case 3:
+            density_threshold = 80
+        case _:
+            density_threshold = 40
 
-cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
+    cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
+elif board_type == 2:
+    cool = gen_checkerboard_grid(int(width/10),int(height/10))
+    density_threshold = "NA"
 
 print("\n  ******************************************\n  *                                        ")
 print("  *  Settings:                             ")
-print(f"  *  Hight: {height}                             ")
+print(f"  *  Height: {height}                             ")
 print(f"  *  Width: {width}                             ")
 print(f"  *  Color: {live_color}                    ")
 print(f"  *  Density: {density_threshold}                           ")
