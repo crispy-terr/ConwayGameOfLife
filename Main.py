@@ -24,6 +24,13 @@ def gen_checkerboard_grid(rows, cols):
                 var[j][i] = False
     return var
 
+def gen_blank_grid(rows, cols):
+    var = [[0 for x in range(rows)] for y in range(cols)]
+    for i in range(rows):
+        for j in range(cols):
+            var[j][i] = False
+    return var
+
 RUNNING, PAUSED = True, False
 
 # Replace default pygame shortcut image
@@ -31,7 +38,7 @@ image = pygame.image.load("Glider.png")
 pygame.display.set_icon(image)
 
 # Configure
-board_type = int(input("Initialize Board:\n1: Random\n2: Checkerboard\nEnter: "))
+board_type = int(input("Initialize Board:\n1: Random\n2: Checkerboard\n3: Blank\nEnter: "))
 
 height = int(input("Height of grid: "))
 width = int(input("Width of grid: "))
@@ -62,10 +69,12 @@ if board_type == 1:
             density_threshold = 40
 
     cool = gen_random_grid(int(width/10),int(height/10), density_threshold)
-
 elif board_type == 2:
     cool = gen_checkerboard_grid(int(width/10),int(height/10))
     density_threshold = "Checkerboard"
+else:
+    cool = gen_blank_grid(int(width/10),int(height/10))
+    density_threshold = "Blank"
 
 print("\n  ******************************************\n  *")
 print("  *  Settings:                             ")
