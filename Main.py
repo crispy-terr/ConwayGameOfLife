@@ -24,6 +24,8 @@ def gen_checkerboard_grid(rows, cols):
                 var[j][i] = False
     return var
 
+RUNNING, PAUSED = 1, 0
+
 # Replace default pygame shortcut image
 image = pygame.image.load("Glider.png")
 pygame.display.set_icon(image)
@@ -81,13 +83,33 @@ pygame.display.set_caption("Conway's Game of Life")
 cool_grid = Grid(cool, surface, live_color)
 
 cool_grid.draw_board()
+state = RUNNING
 
 running = True
 while running:
-    cool_grid.draw_board()
-    cool_grid.run_conway_rules()
-    time.sleep(0.1)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    pygame.display.update()
+    if state == 1:
+        cool_grid.draw_board()
+        cool_grid.run_conway_rules()
+        time.sleep(0.1)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                state = PAUSED
+                cool_grid.set_alive_on_click(pygame.mouse.get_pos())
+                state = RUNNING
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    state = PAUSED
+        pygame.display.update()
+    else:
+        cool_grid.draw_board()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                cool_grid.set_alive_on_click(pygame.mouse.get_pos())
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    state = RUNNING
+        pygame.display.update()

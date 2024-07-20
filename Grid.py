@@ -62,3 +62,9 @@ class Grid:
                     else:
                         next_grid[r][c] = False
         self.grid = next_grid
+
+    def set_alive_on_click(self, mouse_coordinates):
+        grid_y, grid_x = mouse_coordinates
+        grid_x = int(grid_x/10)
+        grid_y = int(grid_y/10)
+        self.grid[grid_x][grid_y] = True
