@@ -1,0 +1,1 @@
+cool_grid.set_alive_on_click(pygame.mouse.get_pos())
